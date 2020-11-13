@@ -61,6 +61,13 @@ describe('The vue esm loader', function() {
 
 		});
 
+		it('external-template.vue', function() {
+
+			let { render } = this.component;
+			expect(render).to.be.a('function');
+
+		});
+
 	});
 
 });
