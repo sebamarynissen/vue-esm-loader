@@ -1,0 +1,58 @@
+// # loader-test.js
+import path from 'path';
+import { expect } from './chai.js';
+
+describe('The vue esm loader', function() {
+
+	context('loads .vue files', function() {
+
+		before(function() {
+
+			this.require = async function(id) {
+				let filePath = path.join('./files', id);
+				return await import(filePath);
+			};
+
+		});
+
+		beforeEach(async function() {
+
+			let { title } = this.currentTest;
+			let module = await this.require(title);
+			this.component = module.default;
+
+		});
+
+		it('script.vue', function() {
+
+			expect(this.component.data()).to.eql({
+				foo: 'bar',
+			});
+
+		});
+
+		it('template.vue', function() {
+
+			expect(this.component.render).to.be.a('function');
+			expect(this.component.staticRenderFns).to.be.an('array');
+			expect(this.component._compiled).to.be.true;
+
+		});
+
+		it('nested.vue', async function() {
+
+			let { components } = this.component;
+			let { default: tpl } = await this.require('template.vue');
+			expect(components.Component).to.equal(tpl);
+
+		});
+
+		it('scoped.vue', function() {
+
+			expect(this.component._scopedId).to.be.ok;
+			
+		});
+
+	});
+
+});
