@@ -53,6 +53,14 @@ describe('The vue esm loader', function() {
 			
 		});
 
+		it('external-script.vue', function() {
+
+			expect(this.component.data()).to.eql({
+				foo: 'bar',
+			});
+
+		});
+
 	});
 
 });
