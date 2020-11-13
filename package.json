@@ -9,7 +9,7 @@
     "./normalizer": "./lib/component-normalizer.js"
   },
   "scripts": {
-    "test": "mocha --experimental-loader=\"./lib/loader.js\""
+    "test": "mocha --experimental-loader=vue-esm-loader"
   },
   "engines": {
     "node": ">=14.x"
