@@ -9,7 +9,7 @@
     "./normalizer": "./lib/component-normalizer.js"
   },
   "scripts": {
-    "test": "mocha --experimental-loader=vue-esm-loader"
+    "test": "mocha --experimental-loader=vue-esm-loader --require ./test/setup.js"
   },
   "engines": {
     "node": ">=14.x"
@@ -31,7 +31,10 @@
     "vue-template-compiler": "^2.6.12"
   },
   "devDependencies": {
+    "@vue/test-utils": "^1.1.1",
     "chai": "^4.2.0",
+    "jsdom": "^16.4.0",
+    "jsdom-global": "^3.0.2",
     "mocha": "^8.2.1",
     "vue": "^2.6.12",
     "vue-loader": "^15.9.5"
