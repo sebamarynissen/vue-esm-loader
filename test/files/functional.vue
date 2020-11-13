@@ -1,3 +1,11 @@
 <template functional>
-	<div></div>
+	<div>{{ props.foo }}</div>
 </template>
+
+<script>
+export default {
+	props: {
+		foo: String,
+	},
+};
+</script>

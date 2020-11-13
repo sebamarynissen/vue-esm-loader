@@ -1,5 +1,6 @@
 // # loader-test.js
 import path from 'path';
+import Vue from 'vue';
 import { expect } from './chai.js';
 
 describe('The vue esm loader', function() {
@@ -41,8 +42,16 @@ describe('The vue esm loader', function() {
 			expect(this.component._scopedId).to.be.ok;
 		});
 
-		it.only('functional.vue', function() {
+		it('functional.vue', function() {
 			expect(this.component.functional).to.be.true;
+			const { component } = this;
+			let props = { foo: 'bar' };
+			let main = new Vue({
+				render(h) {
+					return h(component, { props });
+				},
+			});
+			let el = main.$mount();
 		});
 
 		it('external-script.vue', function() {
