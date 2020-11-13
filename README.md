@@ -29,6 +29,10 @@ and subsequently the loader can be used as
 ```
 node --experimental-loader=vue-esm-loader path/to/your/file.js
 ```
+so that you can import `.vue` files as
+```js
+import Component from './component.vue';
+```
 
 Given that you will probably use it with a testing framework, you need to find a way to pass this node flag to it somehow.
 With [mocha](https://www.npmjs.com/package/mocha) this can be done as
