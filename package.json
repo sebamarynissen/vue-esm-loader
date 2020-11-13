@@ -20,6 +20,10 @@
     "esm"
   ],
   "author": "Sebastiaan Marynissen <sebastiaan.marynissen@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/sebamarynissen/vue-esm-loader"
+  },
   "license": "MIT",
   "dependencies": {
     "@vue/component-compiler-utils": "^3.2.0",
