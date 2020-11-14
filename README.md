@@ -40,6 +40,15 @@ With [mocha](https://www.npmjs.com/package/mocha) this can be done as
 mocha --experimental-loader=vue-esm-loader
 ```
 
+If you want to test a single test file without the hassle of always typing `--experimental-loader=vue-esm-loader`, I suggest using a `.mocharc.cjs` file:
+```js
+// .mocharc.cjs
+'use strict';
+module.exports = {
+	'experimental-loader': 'vue-esm-loader',
+};
+```
+
 ## How does it work?
 
 `vue-esm-loader` is heavily inspired the official [vue-loader](https://www.npmjs.com/package/vue-loader) for webpack.
