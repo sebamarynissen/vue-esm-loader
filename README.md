@@ -45,7 +45,7 @@ If you want to test a single test file without the hassle of always typing `--ex
 // .mocharc.cjs
 'use strict';
 module.exports = {
-	'experimental-loader': 'vue-esm-loader',
+  'experimental-loader': 'vue-esm-loader',
 };
 ```
 
