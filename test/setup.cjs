@@ -1,12 +1,9 @@
 // # setup-jsdom.js
-import jsdom from 'jsdom-global';
-import { createRequire } from 'module';
-jsdom(undefined, {
+require('jsdom-global')(undefined, {
 	pretendToBeVisual: true,
 	url: 'http://localhost',
 });
 
-const require = createRequire(import.meta.url);
 const Vue = require('vue');
 Vue.config.productionTip = false;
 Vue.config.devtools = false;
