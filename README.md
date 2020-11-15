@@ -18,8 +18,24 @@ This project aims to provide a custom loader that is able to load `.vue` single-
 ## Usage
 
 **BEWARE** As module loaders are still experimental in Node, so is `vue-esm-loader`.
-[It is stated that](https://nodejs.org/api/esm.html#esm_experimental_loaders) the loaders api may still change, so there's always a possibility of this module having suddenly stopped working in future Node versions!
+It is stated that the loaders api [may still change](https://nodejs.org/api/esm.html#esm_experimental_loaders), so there's always a possibility of having this module suddenly stopped working in future Node versions!
 Given that module loaders only work with ES modules, it requires your code to be written in ESM format as well.
+This also means that you [must use file extensions](https://nodejs.org/api/esm.html#esm_mandatory_file_extensions) in your code, where this typically isn't a requirement with most bundlers.
+```vue
+<template>
+  <div>{{ foo }}</div>
+</template>
+<script>
+// File extension is mandatory here for it to work on Node!
+import SomeFile from './some-file.js';
+
+export default {
+  data() {
+    return { foo: 'bar' };
+  },
+};
+</script>
+```
 
 That said, installation is as easy as
 ```
@@ -51,6 +67,17 @@ module.exports = {
 
 ## How does it work?
 
-`vue-esm-loader` is heavily inspired the official [vue-loader](https://www.npmjs.com/package/vue-loader) for webpack.
+`vue-esm-loader` is heavily inspired by the official [vue-loader](https://www.npmjs.com/package/vue-loader) for webpack.
 If you're familiar with how `vue-loader` works, you'll find `vue-esm-loader` to be really familiar.
-It basically uses the Node loader api to register certain hooks to alter how `.vue` files should be treated and then uses [vue-template-compiler](https://www.npmjs.com/package/vue-template-compiler) to do the compilation of the html template.
+Basically it transforms the `.vue` file in the `getSource()` hook into something that looks to Node like
+```js
+import { render, staticRenderFns } from './file.vue?type=template';
+import script from './file.vue?type=script';
+
+export default {
+  ...script,
+  render,
+  staticRenderFns,
+};
+```
+and then subsequently the querystring is sniffed to return the correct code blocks, while also compiling the template using `vue-template-compiler` in the `transformSource()` hook.
