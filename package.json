@@ -3,9 +3,9 @@
   "version": "0.0.1-alpha.1",
   "description": "Vue single-file component loader for Node",
   "type": "module",
-  "main": "./lib/loader.js",
+  "main": "./lib/index.js",
   "exports": {
-    ".": "./lib/loader.js",
+    ".": "./lib/index.js",
     "./normalizer": "./lib/component-normalizer.js"
   },
   "scripts": {
