@@ -65,6 +65,22 @@ module.exports = {
 };
 ```
 
+### Composition with other loaders
+
+While `vue-esm-loader` can be used as a standalone loader, if you want to load other file types as well - such as TypeScript for example - then you'll need to use `vue-esm-loader` in combination with a TypeScript loader.
+You can use [node-esm-loader](https://www.npmjs.com/package/node-esm-loader) to do this:
+```js
+// .loaderrc.js
+export default {
+  loaders: [
+    'vue-esm-loader', 
+    // More loaders go here
+  ],
+};
+
+// Now run Node with node --experimental-loader=node-esm-loader
+```
+
 ## How does it work?
 
 `vue-esm-loader` is heavily inspired by the official [vue-loader](https://www.npmjs.com/package/vue-loader) for webpack.
@@ -81,3 +97,21 @@ export default {
 };
 ```
 and then subsequently the querystring is sniffed to return the correct code blocks, while also compiling the template using `vue-template-compiler` in the `transformSource()` hook.
+
+This also means that if you use preprocessors in your `<template>` or `<script>`, you need to configure a proper loader for it that sniffs the `lang` query attribute.
+For example, consider a component that looks like
+```vue
+<template>
+  <div>{{ message }}</div>
+</template>
+
+<script lang="ts">
+// I don't know TypeScript, but let's pretend this code only works in TypeScript.
+export default {
+  data() {
+    return { message: 'This is TypeScript' };
+  },
+};
+</script>
+```
+you will need to set up a loader that not only transforms `.ts` files, but also `.vue?vue&lang=ts` files!
