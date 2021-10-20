@@ -1,6 +1,6 @@
 {
   "name": "vue-esm-loader",
-  "version": "0.0.1-alpha.3",
+  "version": "0.0.1-alpha.4",
   "description": "Vue single-file component loader for Node",
   "type": "module",
   "main": "./lib/index.js",
@@ -28,16 +28,19 @@
   "dependencies": {
     "@vue/component-compiler-utils": "^3.2.0",
     "create-esm-loader": "0.0.1-alpha.0",
-    "hash-sum": "^2.0.0",
-    "vue-template-compiler": "^2.6.12"
+    "hash-sum": "^2.0.0"
+  },
+  "peerDependencies": {
+    "vue-template-compiler": "2.x"
   },
   "devDependencies": {
     "@vue/test-utils": "^1.1.1",
     "chai": "^4.2.0",
     "jsdom": "^16.4.0",
     "jsdom-global": "^3.0.2",
-    "mocha": "^8.2.1",
-    "vue": "^2.6.12",
-    "vue-loader": "^15.9.5"
+    "mocha": "^9.1.3",
+    "vue": "^2.6.14",
+    "vue-loader": "^15.9.5",
+    "vue-template-compiler": "^2.6.14"
   }
 }
