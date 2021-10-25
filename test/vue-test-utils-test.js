@@ -1,7 +1,7 @@
 // # vue-test-utils-test.js
-import path from 'path';
+import path from 'node:path';
 import { mount } from '@vue/test-utils';
-import { expect } from './chai.js';
+import { expect } from 'chai';
 import Person from './files/person.vue';
 
 describe('Using vue-test-utils', function() {

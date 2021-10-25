@@ -1,7 +1,7 @@
 // # loader-test.js
-import path from 'path';
+import path from 'node:path';
 import Vue from 'vue';
-import { expect } from './chai.js';
+import { expect } from 'chai';
 
 describe('The vue esm loader', function() {
 
