@@ -27,7 +27,7 @@
   "license": "MIT",
   "dependencies": {
     "@vue/component-compiler-utils": "^3.2.0",
-    "create-esm-loader": "^0.0.1",
+    "create-esm-loader": "^0.1.0",
     "hash-sum": "^2.0.0"
   },
   "peerDependencies": {
