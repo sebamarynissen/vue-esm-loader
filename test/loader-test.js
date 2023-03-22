@@ -32,7 +32,7 @@ describe('The vue esm loader', function() {
 			});
 		});
 
-		it.only('template.vue', async function() {
+		it('template.vue', async function() {
 			const component = await this.require();
 			expect(component.render).to.be.a('function');
 			if (version === 2) {
@@ -49,7 +49,7 @@ describe('The vue esm loader', function() {
 
 		it('scoped.vue', async function() {
 			const component = await this.require();
-			expect(component._scopedId).to.be.ok;
+			expect(component._scopedId || component.__scopeId).to.be.ok;
 		});
 
 		it('functional.vue', async function() {
