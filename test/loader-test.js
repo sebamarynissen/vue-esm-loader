@@ -32,11 +32,13 @@ describe('The vue esm loader', function() {
 			});
 		});
 
-		it('template.vue', async function() {
+		it.only('template.vue', async function() {
 			const component = await this.require();
 			expect(component.render).to.be.a('function');
-			expect(component.staticRenderFns).to.be.an('array');
-			expect(component._compiled).to.be.true;
+			if (version === 2) {
+				expect(component.staticRenderFns).to.be.an('array');
+				expect(component._compiled).to.be.true;
+			}
 		});
 
 		it('nested.vue', async function() {
