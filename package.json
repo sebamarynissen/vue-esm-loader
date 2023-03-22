@@ -1,6 +1,6 @@
 {
   "name": "vue-esm-loader",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "Vue single-file component loader for Node",
   "type": "module",
   "main": "./lib/index.js",
