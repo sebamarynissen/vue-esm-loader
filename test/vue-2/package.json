@@ -1,0 +1,14 @@
+{
+	"type": "module",
+	"devDependencies": {
+		"@vue/test-utils": "^1.1.1",
+		"jsdom": "^16.7.0",
+		"jsdom-global": "^3.0.2",
+		"vue": "^2.7.14",
+		"vue-loader": "^15.10.1",
+		"vue-template-compiler": "^2.7.14"
+	},
+	"dependencies": {
+		"vue-esm-loader": "file:../.."
+	}
+}
