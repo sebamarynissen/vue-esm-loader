@@ -23,5 +23,7 @@ function three() {
 		pretendToBeVisual: true,
 		url: 'http://localhost',
 	});
-	globalThis.SVGElement = class {};
+	if (!('SVGElement' in globalThis)) {
+		globalThis.SVGElement = class {};
+	}
 }
