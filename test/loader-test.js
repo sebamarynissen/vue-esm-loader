@@ -54,6 +54,12 @@ describe('The vue esm loader', function() {
 			let el = main.$mount();
 		});
 
+		it('setup.vue', function() {
+			const { component } = this;
+			expect(component.foo).to.equal('bar');
+			expect(component.setup().foo).to.equal('baz');
+		});
+
 		it('external-script.vue', function() {
 			expect(this.component.data()).to.eql({
 				foo: 'bar',
