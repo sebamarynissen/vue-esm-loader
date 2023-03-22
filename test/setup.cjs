@@ -1,9 +1,17 @@
 // # setup-jsdom.js
-require('jsdom-global')(undefined, {
-	pretendToBeVisual: true,
-	url: 'http://localhost',
-});
+'use strict';
+const pkg = require(require.resolve('vue/package.json'));
+if (pkg.version.startsWith('2')) {
+	two();
+}
 
-const Vue = require('vue');
-Vue.config.productionTip = false;
-Vue.config.devtools = false;
+function two() {
+	require('jsdom-global')(undefined, {
+		pretendToBeVisual: true,
+		url: 'http://localhost',
+	});
+
+	const Vue = require('vue');
+	Vue.config.productionTip = false;
+	Vue.config.devtools = false;
+}

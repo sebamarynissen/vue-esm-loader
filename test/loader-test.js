@@ -1,26 +1,15 @@
 // # loader-test.js
 import path from 'node:path';
-import { createRequire } from 'node:module';
 import semver from 'semver';
-import Vue from 'vue';
 import { expect } from 'chai';
-const require = createRequire(import.meta.url);
+import version from '../lib/vue-version.js';
 
 describe('The vue esm loader', function() {
 
 	before(function() {
-		let version;
-		Object.defineProperty(this, 'version', {
-			get() {
-				if (version) return version;
-				let pkg = require(require.resolve('vue/package.json'));
-				return (version = pkg.version);
-			},
-		});
 
 		this.semver = function(expr) {
-			let { version } = this;
-			if (!semver.satisfies(this.version, expr)) {
+			if (!semver.satisfies(version, expr)) {
 				this.skip();
 			}
 		};
@@ -62,6 +51,8 @@ describe('The vue esm loader', function() {
 		});
 
 		it('functional.vue', async function() {
+			this.semver('<3');
+			const { default: Vue } = await import('vue');
 			const component = await this.require();
 			expect(component.functional).to.be.true;
 			let props = { foo: 'bar' };
