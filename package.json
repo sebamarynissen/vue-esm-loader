@@ -12,12 +12,12 @@
   "scripts": {
     "lint": "eslint --ext .js lib test",
     "test": "npm run test:2.6 && npm run test:2.7 && npm run test:3",
-    "pretest:2.6": "npm install --save-dev @vue/test-utils@1.1.1 jsdom@16 jsdom-global@3 vue@2.6 vue-template-compiler@2.6 @vue/component-compiler-utils",
+    "pretest:2.6": "npm install --save-dev @vue/test-utils@1.1.1 vue@2.6 vue-template-compiler@2.6 @vue/component-compiler-utils",
     "test:2.6": "mocha",
-    "posttest:2.6": "npm uninstall @vue/test-utils jsdom jsdom-global vue vue-template-compiler @vue/component-compiler-utils",
-    "pretest:2.7": "npm install --save-dev @vue/test-utils@1.1.1 jsdom@16 jsdom-global@3 vue@2",
+    "posttest:2.6": "npm uninstall @vue/test-utils vue vue-template-compiler @vue/component-compiler-utils",
+    "pretest:2.7": "npm install --save-dev @vue/test-utils@1.1.1 vue@2",
     "test:2.7": "mocha",
-    "posttest:2.7": "npm uninstall @vue/test-utils jsdom jsdom-global vue",
+    "posttest:2.7": "npm uninstall @vue/test-utils vue",
     "pretest:3": "npm install --save-dev vue@3 @vue/test-utils@2",
     "test:3": "mocha",
     "posttest:3": "npm uninstall vue @vue/test-utils"
@@ -45,6 +45,8 @@
     "@whisthub/eslint-config": "^1.0.2",
     "chai": "^4.3.4",
     "eslint": "^8.36.0",
+    "jsdom": "^16.7.0",
+    "jsdom-global": "^3.0.2",
     "mocha": "^9.1.3",
     "semver": "^7.3.8",
     "vue": "^3.2.47"
