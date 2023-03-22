@@ -70,7 +70,9 @@ describe('The vue esm loader', function() {
 			this.semver('>=2.7');
 			const component = await this.require();
 			expect(component.foo).to.equal('bar');
-			expect(component.setup().foo).to.equal('baz');
+			expect(component.setup({}, {
+				expose() {},
+			}).foo).to.equal('baz');
 		});
 
 		it('external-script.vue', async function() {
@@ -84,6 +86,11 @@ describe('The vue esm loader', function() {
 			const component = await this.require();
 			let { render } = component;
 			expect(render).to.be.a('function');
+		});
+
+		it('multi-root.vue', async function() {
+			this.semver('>=3');
+			await this.require();
 		});
 
 	});
