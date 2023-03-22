@@ -61,7 +61,7 @@ describe('The vue esm loader', function() {
 					return h(component, { props });
 				},
 			});
-			let el = main.$mount();
+			main.$mount();
 		});
 
 		it('setup.vue', async function() {
