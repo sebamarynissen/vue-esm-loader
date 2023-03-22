@@ -9,7 +9,10 @@
     "./normalizer": "./lib/component-normalizer.js"
   },
   "scripts": {
-    "test": "npm run test:2.7",
+    "test": "npm run test:2.6 && npm run test:2.7",
+    "pretest:2.6": "npm install --save-dev @vue/test-utils@1.1.1 jsdom@16 jsdom-global@3 vue@2.6 vue-template-compiler@2.6 @vue/component-compiler-utils",
+    "test:2.6": "mocha",
+    "posttest:2.6": "npm uninstall @vue/test-utils jsdom jsdom-global vue vue-template-compiler @vue/component-compiler-utils",
     "pretest:2.7": "npm install --save-dev @vue/test-utils@1.1.1 jsdom@16 jsdom-global@3 vue@2",
     "test:2.7": "mocha",
     "posttest:2.7": "npm uninstall @vue/test-utils jsdom jsdom-global vue"
@@ -34,6 +37,7 @@
   },
   "devDependencies": {
     "chai": "^4.3.4",
-    "mocha": "^9.1.3"
+    "mocha": "^9.1.3",
+    "semver": "^7.3.8"
   }
 }
