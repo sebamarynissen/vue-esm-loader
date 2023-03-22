@@ -1,3 +1,4 @@
 test/**
+.eslintrc.cjs
 .mocharc.cjs
 .github
