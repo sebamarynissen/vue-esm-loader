@@ -37,7 +37,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "create-esm-loader": "^0.1.2",
+    "create-esm-loader": "^0.2.5",
     "hash-sum": "^2.0.0"
   },
   "devDependencies": {
