@@ -9,6 +9,9 @@
     "./normalizer": "./lib/component-normalizer.js",
     "./export-helper": "./lib/export-helper.js"
   },
+  "imports": {
+    "#vue/version": "./lib/vue-version.js"
+  },
   "scripts": {
     "lint": "eslint --ext .js lib test",
     "test": "npm run test:2.6 && npm run test:2.7 && npm run test:3",
