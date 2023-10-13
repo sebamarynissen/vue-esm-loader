@@ -2,7 +2,7 @@
 import path from 'node:path';
 import semver from 'semver';
 import { expect } from 'chai';
-import version from '../lib/vue-version.js';
+import version from '#vue/version';
 
 describe('The vue esm loader', function() {
 
