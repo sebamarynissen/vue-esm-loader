@@ -1,5 +1,5 @@
 'use strict';
 module.exports = {
-	require: require.resolve('./test/setup.cjs'),
+	require: require.resolve('./setup.cjs'),
 	'experimental-loader': 'vue-esm-loader',
 };
