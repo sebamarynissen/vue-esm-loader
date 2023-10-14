@@ -33,4 +33,11 @@ describe('vue-esm-loader with custom options', function() {
 
 	});
 
+	it('compiles an custom template to html', async function() {
+
+		const Component = await this.require('custom.vue');
+		expect(Component.render+'').to.include('Hello world');
+
+	});
+
 });
