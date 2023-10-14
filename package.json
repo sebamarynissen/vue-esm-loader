@@ -17,13 +17,13 @@
     "test": "npm run test:2.6 && npm run test:2.7 && npm run test:3",
     "tests": "node test/shell.js",
     "pretest:2.6": "npm install --save-dev @vue/test-utils@1.1.1 vue@2.6 vue-template-compiler@2.6 @vue/component-compiler-utils",
-    "test:2.6": "mocha",
+    "test:2.6": "npm run tests",
     "posttest:2.6": "npm uninstall @vue/test-utils vue vue-template-compiler @vue/component-compiler-utils",
     "pretest:2.7": "npm install --save-dev @vue/test-utils@1.1.1 vue@2",
-    "test:2.7": "mocha",
+    "test:2.7": "npm run tests",
     "posttest:2.7": "npm uninstall @vue/test-utils vue",
     "pretest:3": "npm install --save-dev vue@3 @vue/test-utils@2",
-    "test:3": "mocha",
+    "test:3": "npm run tests",
     "posttest:3": "npm uninstall vue @vue/test-utils"
   },
   "engines": {
