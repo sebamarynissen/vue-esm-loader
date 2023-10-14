@@ -15,6 +15,7 @@
   "scripts": {
     "lint": "eslint --ext .js lib test",
     "test": "npm run test:2.6 && npm run test:2.7 && npm run test:3",
+    "tests": "node test/shell.js",
     "pretest:2.6": "npm install --save-dev @vue/test-utils@1.1.1 vue@2.6 vue-template-compiler@2.6 @vue/component-compiler-utils",
     "test:2.6": "mocha",
     "posttest:2.6": "npm uninstall @vue/test-utils vue vue-template-compiler @vue/component-compiler-utils",
