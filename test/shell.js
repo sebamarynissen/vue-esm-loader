@@ -8,14 +8,9 @@ for (let name of fs.readdirSync(__dirname)) {
 	let handle = path.join(__dirname, name);
 	let stats = fs.statSync(handle);
 	if (!stats.isDirectory()) continue;
-	let result = run(handle);
-	process.stdout.write(result);
-}
-
-function run(dir) {
 	let command = `npx mocha .`;
-	console.log(`Running "${command}" in ${dir}`);
-	return cp.execSync(command, {
-		cwd: dir,
+	cp.execSync(command, {
+		cwd: handle,
+		stdio: 'inherit',
 	});
 }
