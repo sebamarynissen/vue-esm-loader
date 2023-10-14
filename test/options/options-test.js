@@ -25,4 +25,12 @@ describe('vue-esm-loader with custom options', function() {
 
 	});
 
+	it('imports .md that compiles compile to vue', async function() {
+
+		const Component = await this.require('markdown.md');
+		expect(Component.markdown).to.equal('# This is markdown');
+		expect(Component.render).to.be.ok;
+
+	});
+
 });

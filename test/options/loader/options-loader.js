@@ -1,11 +1,6 @@
 import hooks from 'vue-esm-loader';
 import create from 'create-esm-loader';
 
-// For some weird reason we cannot simply use "vue-esm-loader", so we need to 
-// build up the full url. Wtf.
-// const require = createRequire(import.meta.url);
-// const url = pathToFileURL(require.resolve('vue-esm-loader'));
-
 export const {
 	resolve,
 	getFormat,
@@ -21,7 +16,23 @@ export const {
 	{
 		hooks,
 		options: {
-			files: [/\.vuex?/],
+			files: [/\.vuex?$/, /\.md$/],
+			preprocess(input, ctx) {
+				let source = String(input);
+				let { pathname } = new URL(ctx.url);
+				if (pathname.match(/\.md$/)) {
+					return `
+						<template>
+							<div>${source}</div>
+						</template>
+						<script>
+						export default {
+							markdown: ${JSON.stringify(source.trim())},
+						};
+						</script>
+					`;
+				}
+			},
 		},
 	},
 
