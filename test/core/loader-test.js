@@ -20,8 +20,7 @@ describe('The vue esm loader', function() {
 
 		before(function() {
 			this.require = async function(id = this.test.title) {
-				let filePath = path.join('./files', id);
-				return (await import(filePath)).default;
+				return (await import(`./files/${id}`)).default;
 			};
 		});
 

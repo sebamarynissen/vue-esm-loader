@@ -14,6 +14,7 @@ for (let name of fs.readdirSync(__dirname)) {
 
 function run(dir) {
 	let command = `npx mocha .`;
+	console.log(`Running "${command}" in ${dir}`);
 	return cp.execSync(command, {
 		cwd: dir,
 	});
