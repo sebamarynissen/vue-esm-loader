@@ -81,6 +81,33 @@ export default {
 // Now run Node with node --experimental-loader=node-esm-loader
 ```
 
+Since `vue-esm-loader@0.2.0` this also allows specific options to be passed to vue-esm-loader to customize its behavior:
+```js
+export default {
+  loaders: [
+    {
+      loader: 'vue-esm-loader',
+      options: {
+
+        // Transform both ".vue" and ".md" files.
+        files: [/\.vue$/, /\.md$/],
+
+        // Add a preprocessor that compiles to a vue SFC, for example from markdown.
+        preprocess(source, ctx) {
+          let { pathname } = new URL(ctx.url);
+          if (pathname.match(/\.md$/)) {
+            return `<template>
+              <article>${marked(String(source)}</article>
+            </template>`;
+          }
+        },
+
+      },
+    },
+  ],
+};
+```
+
 ## How does it work?
 
 `vue-esm-loader` is heavily inspired by the official [vue-loader](https://www.npmjs.com/package/vue-loader) for webpack.
@@ -115,3 +142,4 @@ export default {
 </script>
 ```
 you will need to set up a loader that not only transforms `.ts` files, but also `.vue?vue&lang=ts` files!
+For an example, refer to the test/options folder for how this is done for `lang=pug`.

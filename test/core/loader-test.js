@@ -2,7 +2,7 @@
 import path from 'node:path';
 import semver from 'semver';
 import { expect } from 'chai';
-import version from '../lib/vue-version.js';
+import version from '#vue/version';
 
 describe('The vue esm loader', function() {
 
@@ -20,8 +20,7 @@ describe('The vue esm loader', function() {
 
 		before(function() {
 			this.require = async function(id = this.test.title) {
-				let filePath = path.join('./files', id);
-				return (await import(filePath)).default;
+				return (await import(`./files/${id}`)).default;
 			};
 		});
 

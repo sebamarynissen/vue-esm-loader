@@ -2,7 +2,7 @@
 import { mount } from '@vue/test-utils';
 import { expect } from 'chai';
 import Person from './files/person.vue';
-import { major } from '../lib/vue-version.js';
+import { major } from '#vue/version';
 
 describe('Using vue-test-utils', function() {
 
