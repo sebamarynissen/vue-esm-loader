@@ -1,0 +1,9 @@
+<template>
+	<div>This is a fictional file format</div>
+</template>
+
+<script>
+export default {
+	props: ['vuex'],
+};
+</script>
