@@ -1,8 +1,13 @@
 <template>
-	<div>Hello world</div>
+	<div>
+		Hello world
+		<custom-component />
+	</div>
 </template>
 
 <script>
+import CustomComponent from './custom-component.vue';
+
 export default {
 	foo: 'bar',
 };
