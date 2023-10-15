@@ -1,5 +1,4 @@
 // # loader-test.js
-import path from 'node:path';
 import semver from 'semver';
 import { expect } from 'chai';
 import version from '#vue/version';
@@ -72,6 +71,23 @@ describe('The vue esm loader', function() {
 			expect(component.setup({}, {
 				expose() {},
 			}).foo).to.equal('baz');
+			
+			// Test that the components are properly available when using script 
+			// setup. Depends on whether we're using 2 or 3 obviously.
+			const { render } = component;
+			if (semver.satisfies(version, '2')) {
+				let result = render.call({
+					_self: {
+						_c: (...args) => args,
+						_setupProxy: {
+							CustomComponent: 'this is it',
+						},
+					},
+					_v: x => x,
+				}).flat(Infinity);
+				expect(result).to.include('this is it');
+			}
+
 		});
 
 		it('external-script.vue', async function() {
