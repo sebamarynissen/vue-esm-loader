@@ -1,18 +1,17 @@
 // # loader-test.js
 import semver from 'semver';
 import { expect } from 'chai';
+import { mount } from '../mount.js';
 import version from '#vue/version';
 
 describe('The vue esm loader', function() {
 
 	before(function() {
-
 		this.semver = function(expr) {
 			if (!semver.satisfies(version, expr)) {
 				this.skip();
 			}
 		};
-
 	});
 
 	context('loads .vue files', function() {
@@ -68,25 +67,18 @@ describe('The vue esm loader', function() {
 			this.semver('>=2.7');
 			const component = await this.require();
 			expect(component.foo).to.equal('bar');
-			expect(component.setup({}, {
+			const exposed = component.setup({}, {
 				expose() {},
-			}).foo).to.equal('baz');
-			
-			// Test that the components are properly available when using script 
-			// setup. Depends on whether we're using 2 or 3 obviously.
-			const { render } = component;
-			if (semver.satisfies(version, '2')) {
-				let result = render.call({
-					_self: {
-						_c: (...args) => args,
-						_setupProxy: {
-							CustomComponent: 'this is it',
-						},
-					},
-					_v: x => x,
-				}).flat(Infinity);
-				expect(result).to.include('this is it');
-			}
+			});
+			expect(exposed.foo).to.equal('baz');
+			expect(exposed.CustomComponent).to.be.ok;
+
+			let el = await mount(component);
+			let html = el.innerHTML;
+
+			// Test that `<custom-component>` has been properly resolved.
+			expect(html).to.include('Foo: baz');
+			expect(html).to.not.include('<custom-component');
 
 		});
 

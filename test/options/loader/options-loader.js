@@ -42,6 +42,9 @@ export const {
 						<template>
 							<div>${source}</div>
 						</template>
+						<script setup>
+						const name = 'Markdown';
+						</script>
 						<script>
 						export default {
 							markdown: ${JSON.stringify(source.trim())},
