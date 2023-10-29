@@ -1,4 +1,5 @@
 // # loader-test.js
+import './setup-jsdom.js';
 import semver from 'semver';
 import { expect } from 'chai';
 import version from '#vue/version';
@@ -68,25 +69,36 @@ describe('The vue esm loader', function() {
 			this.semver('>=2.7');
 			const component = await this.require();
 			expect(component.foo).to.equal('bar');
-			expect(component.setup({}, {
+			const exposed = component.setup({}, {
 				expose() {},
-			}).foo).to.equal('baz');
-			
-			// Test that the components are properly available when using script 
-			// setup. Depends on whether we're using 2 or 3 obviously.
-			const { render } = component;
+			});
+			expect(exposed.foo).to.equal('baz');
+			expect(exposed.CustomComponent).to.be.ok;
+
+			let html;
 			if (semver.satisfies(version, '2')) {
-				let result = render.call({
-					_self: {
-						_c: (...args) => args,
-						_setupProxy: {
-							CustomComponent: 'this is it',
-						},
-					},
-					_v: x => x,
-				}).flat(Infinity);
-				expect(result).to.include('this is it');
+				const { default: Vue } = await import('vue');
+				Vue.config.devtools = false;
+				Vue.config.productionTip = false;
+
+				const el = document.createElement('div');
+				document.body.appendChild(el);
+				const app = new Vue(component);
+				app.$mount(el);
+				html = app.$el.innerHTML;
+			} else {
+
+				const { createApp } = await import('vue');
+				const app = createApp(component);
+				const el = document.createElement('div');
+				const vm = app.mount(el);
+				html = vm.$el.innerHTML;
+
 			}
+
+			// Test that `<custom-component>` has been properly resolved.
+			expect(html).to.include('Foo: baz');
+			expect(html).to.not.include('<custom-component');
 
 		});
 

@@ -1,18 +1,18 @@
 <template>
 	<div>
-		Hello world
+		Foo: {{ foo }}
 		<custom-component />
 	</div>
 </template>
 
 <script>
-import CustomComponent from './custom-component.vue';
-
 export default {
 	foo: 'bar',
 };
 </script>
 
 <script setup>
+import CustomComponent from './custom-component.vue';
+
 const foo = 'baz';
 </script>
