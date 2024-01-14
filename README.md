@@ -142,4 +142,57 @@ export default {
 </script>
 ```
 you will need to set up a loader that not only transforms `.ts` files, but also `.vue?vue&lang=ts` files!
-For an example, refer to the test/options folder for how this is done for `lang=pug`.
+For an example, refer to the test/options folder for how this is done for `lang=pug`or see the example below.
+
+## Typescript example
+
+Here is a working `.loaderrc.js` that allows using TypeScript in `.vue` files. This requires the installation of
+`node-esm-loader` and `esm-loader-typescript`.
+
+```js
+import ts from 'typescript';
+import path from 'node:path';
+import process from 'node:process';
+
+let tsConfig;
+const vueTsRegex = /lang=ts/;
+
+export default {
+  loaders: [
+    'esm-loader-typescript',
+    'vue-esm-loader',
+    {
+      resolve(specifier, ctx) {
+        if (!vueTsRegex.test(specifier)) {
+          return;
+        }
+        return {
+          format: 'module',
+          url: new URL(specifier, ctx.parentURL).href,
+        };
+      },
+      transform(source, ctx) {
+        if (!vueTsRegex.test(ctx.url)) {
+          return;
+        }
+
+        if (!tsConfig) {
+          const configFileName = ts.findConfigFile(process.cwd(), ts.sys.fileExists, ctx.config || 'tsconfig.json');
+          const configFile = ts.readConfigFile(configFileName, ts.sys.readFile);
+          const compilerOptions = ts.parseJsonConfigFileContent(configFile.config, ts.sys, path.dirname(configFileName));
+
+          tsConfig = compilerOptions.options;
+          tsConfig.inlineSourceMap = true;
+          if (!tsConfig.module) tsConfig.module = ts.ModuleKind.ESNext;
+        }
+
+        const { outputText } = ts.transpileModule(String(source), {
+          compilerOptions: tsConfig,
+          fileName: ctx.url,
+        });
+        return { source: outputText };
+      }
+    }
+  ]
+}
+```

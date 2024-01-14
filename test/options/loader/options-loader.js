@@ -9,8 +9,8 @@ export const {
 	load,
 } = await create([
 
-	// Mock what a pug loader could look like. Note that create-esm-loader does 
-	// not properly support webpack syntax here as it chokes on query 
+	// Mock what a pug loader could look like. Note that create-esm-loader does
+	// not properly support webpack syntax here as it chokes on query
 	// parameters. We should fix it there and then we can update here.
 	{
 		resolve(specifier, ctx) {
@@ -26,9 +26,9 @@ export const {
 		},
 	},
 
-	// For some reason we cannot reference ourselves as "vue-esm-loader" here. 
-	// No idea why, might be an issue with create-esm-loader or a problem with 
-	// the node resolution algorithm. Anyway, specifying ourselves as *config* 
+	// For some reason we cannot reference ourselves as "vue-esm-loader" here.
+	// No idea why, might be an issue with create-esm-loader or a problem with
+	// the node resolution algorithm. Anyway, specifying ourselves as *config*
 	// does work though, which should be equivalent.
 	{
 		hooks,

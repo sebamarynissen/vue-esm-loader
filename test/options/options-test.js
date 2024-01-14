@@ -19,7 +19,6 @@ describe('vue-esm-loader with custom options', function() {
 		expect(Component.props).to.eql(['vue']);
 
 	});
-
 	it('imports .vuex files', async function() {
 
 		const Component = await this.require('component.vuex');
