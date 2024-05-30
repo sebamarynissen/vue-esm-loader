@@ -1,6 +1,6 @@
 import semver from 'semver';
 import { expect } from 'chai';
-import version from '#vue/version';
+import version from '../version.js';
 
 describe('vue-esm-loader with typescript', function() {
 
