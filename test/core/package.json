@@ -4,5 +4,8 @@
   "private": true,
   "scripts": {
     "test": "mocha *-test.js"
+  },
+  "devDependencies": {
+    "pug": "^3.0.3"
   }
 }
