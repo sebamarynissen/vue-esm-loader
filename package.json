@@ -17,9 +17,18 @@
   },
   "homepage": "https://github.com/sebamarynissen/vue-esm-loader#readme",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm test --workspaces --if-present"
   },
   "workspaces": [
+    "test/core",
     "packages/vue-esm-loader"
-  ]
+  ],
+  "devDependencies": {
+    "@whisthub/eslint-config": "^3.0.0",
+    "chai": "^5.1.1",
+    "eslint": "^9.3.0",
+    "jsdom": "^24.1.0",
+    "mocha": "^10.4.0",
+    "semver": "^7.6.2"
+  }
 }

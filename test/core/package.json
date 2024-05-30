@@ -1,0 +1,7 @@
+{
+  "name": "vue-esm-loader-test-core",
+  "private": true,
+  "scripts": {
+    "test": "mocha *-test.js"
+  }
+}
