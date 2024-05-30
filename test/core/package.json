@@ -3,6 +3,6 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "mocha": "mocha *-test.js"
+    "test": "mocha *-test.js"
   }
 }
