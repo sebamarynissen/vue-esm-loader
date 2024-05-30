@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/sebamarynissen/vue-esm-loader#readme",
   "scripts": {
-    "test": "npm test -w test"
+    "test": "npm test -w test --if-present"
   },
   "workspaces": [
     "test",
