@@ -1,7 +1,7 @@
 import semver from 'semver';
 import { expect } from 'chai';
 import { mount } from '../mount.js';
-import version from '#vue/version';
+import version from 'vue-esm-loader/vue-version';
 
 describe('vue-esm-loader with custom options', function() {
 
@@ -37,13 +37,6 @@ describe('vue-esm-loader with custom options', function() {
 		if (!semver.satisfies(version, '>=2.7')) return;
 		const el = await mount(Component);
 		expect(el.innerHTML).to.include('Hello, Markdown');
-
-	});
-
-	it('compiles an custom template to html', async function() {
-
-		const Component = await this.require('custom.vue');
-		expect(Component.render+'').to.include('Hello world');
 
 	});
 

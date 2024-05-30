@@ -32,6 +32,7 @@
   },
   "workspaces": [
     "test/core",
+    "test/options",
     "packages/vue-esm-loader"
   ],
   "devDependencies": {
