@@ -15,21 +15,10 @@
     "#vue/version": "./lib/vue-version.js"
   },
   "scripts": {
-    "lint": "eslint --ext .js lib test",
-    "test": "npm run test:2.6 && npm run test:2.7 && npm run test:3",
-    "tests": "node test/shell.js",
-    "pretest:2.6": "npm install --save-dev @vue/test-utils@1.1.1 vue@2.6 vue-template-compiler@2.6 @vue/component-compiler-utils typescript@5",
-    "test:2.6": "npm run tests",
-    "posttest:2.6": "npm uninstall @vue/test-utils vue vue-template-compiler @vue/component-compiler-utils typescript",
-    "pretest:2.7": "npm install --save-dev @vue/test-utils@1.1.1 vue@2 typescript@5",
-    "test:2.7": "npm run tests",
-    "posttest:2.7": "npm uninstall @vue/test-utils vue typescript",
-    "pretest:3": "npm install --save-dev vue@3 @vue/test-utils@2 typescript@5",
-    "test:3": "npm run tests",
-    "posttest:3": "npm uninstall vue @vue/test-utils typescript"
+    "lint": "eslint --ext .js lib test"
   },
   "engines": {
-    "node": ">=14.x"
+    "node": "^18.19.0 || >=20.6.0"
   },
   "keywords": [
     "Vue",

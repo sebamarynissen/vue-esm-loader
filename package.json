@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "engines": {
-    "node": "^18.19.0 || > 20.6.0"
+    "node": "^18.19.0 || >=20.6.0"
   },
   "description": "Monorepo for the development of vue-esm-loader",
   "repository": {
@@ -17,9 +17,10 @@
   },
   "homepage": "https://github.com/sebamarynissen/vue-esm-loader#readme",
   "scripts": {
-    "test": "npm test --workspaces --if-present"
+    "test": "npm test -w test"
   },
   "workspaces": [
+    "test",
     "test/core",
     "packages/vue-esm-loader"
   ],

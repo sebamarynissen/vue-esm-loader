@@ -10,6 +10,7 @@ const keys = [
 	'window',
 	'SVGElement',
 	'Element',
+	'HTMLBodyElement',
 ];
 Object.assign(globalThis, Object.fromEntries(
 	keys.map(key => [key, dom.window[key]]),
