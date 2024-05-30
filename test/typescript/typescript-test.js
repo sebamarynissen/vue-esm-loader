@@ -1,6 +1,7 @@
 import semver from 'semver';
 import { expect } from 'chai';
-import version from '#vue/version';
+import version from '../version.js';
+import { mount } from '../mount.js';
 
 describe('vue-esm-loader with typescript', function() {
 
@@ -33,6 +34,15 @@ describe('vue-esm-loader with typescript', function() {
     expect(Component.render).to.be.ok;
     expect(Component.props).to.have.all.keys('message');
     expect(Component.props.message.required).to.be.true;
+
+  });
+
+  it('imports nested .ts files with tsx', async function() {
+
+    this.semver('>=2.7');
+    const Component = await this.require('ts-component-nested.vue');
+    let el = await mount(Component);
+    expect(el.outerHTML).to.equal('<p>This is some message</p>');
 
   });
 

@@ -1,0 +1,11 @@
+{
+  "name": "vue-esm-loader-test-typescript",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "test": "mocha *-test.js"
+  },
+  "devDependencies": {
+    "tsx": "^4.11.0"
+  }
+}

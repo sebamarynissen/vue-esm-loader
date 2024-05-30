@@ -13,7 +13,7 @@ export function resolveCompiler() {
 	// Check 2.7.
 	if (major === 2 && Number(minor) < 7) {
 		return (cached = {
-			compiler: require('@vue/component-compiler-utils'),
+			compiler: tryRequire('@vue/component-compiler-utils'),
 			templateCompiler: () => loadTemplateCompiler(),
 		});
 	}
@@ -30,19 +30,27 @@ export function resolveCompiler() {
 let templateCompiler;
 function loadTemplateCompiler() {
 	if (templateCompiler) return templateCompiler;
-	return (templateCompiler = require('vue-template-compiler'));
+	return (templateCompiler = tryRequire('vue-template-compiler'));
 }
 
 // Vue 3.2.13+ ships the SFC compiler directly under the vue package, but we 
 // have to support versions below that as well.
 function getSFCCompiler() {
 	try {
-		return require('vue/compiler-sfc');
+		return tryRequire('vue/compiler-sfc');
 	} catch {
 		try {
-			return require('@vue/compiler-sfc');
+			return tryRequire('@vue/compiler-sfc');
 		} catch (e) {
 			throw new Error(`vue-esm-loader requires @vue/compiler-sfc to be present in the dependencies! Please install vue >=3.2.13`);
 		}
 	}
+}
+
+// # tryRequire(id)
+// We can't just use require "as is" because we need to make sure we start 
+// resolving from the current working directory!
+function tryRequire(id) {
+	const root = process.cwd();
+	return require(require.resolve(id, { paths: [root] }));
 }

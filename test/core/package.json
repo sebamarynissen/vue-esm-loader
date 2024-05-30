@@ -1,0 +1,11 @@
+{
+  "name": "vue-esm-loader-test-core",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "test": "mocha *-test.js"
+  },
+  "devDependencies": {
+    "pug": "^3.0.3"
+  }
+}

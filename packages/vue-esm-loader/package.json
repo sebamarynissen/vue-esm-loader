@@ -1,0 +1,45 @@
+{
+  "name": "vue-esm-loader",
+  "version": "0.2.0",
+  "description": "Vue single-file component loader for Node",
+  "type": "module",
+  "main": "./lib/esm-loader.js",
+  "exports": {
+    ".": "./lib/api.js",
+    "./hooks": "./lib/esm-loader.js",
+    "./register": "./lib/register.js",
+    "./normalizer": "./lib/component-normalizer.js",
+    "./export-helper": "./lib/export-helper.js"
+  },
+  "imports": {
+    "#vue/version": "./lib/vue-version.js"
+  },
+  "engines": {
+    "node": "^18.19.0 || >=20.6.0"
+  },
+  "keywords": [
+    "Vue",
+    "loader",
+    "esm"
+  ],
+  "author": "Sebastiaan Marynissen <sebastiaan.marynissen@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/sebamarynissen/vue-esm-loader.git"
+  },
+  "license": "MIT",
+  "scripts": {
+    "prepublishOnly": "node ../../scripts/copy.js"
+  },
+  "dependencies": {
+    "@rollup/pluginutils": "^5.1.0",
+    "hash-sum": "^2.0.0"
+  },
+  "bugs": {
+    "url": "https://github.com/sebamarynissen/vue-esm-loader/issues"
+  },
+  "homepage": "https://github.com/sebamarynissen/vue-esm-loader#readme",
+  "directories": {
+    "lib": "lib"
+  }
+}

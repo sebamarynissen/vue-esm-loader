@@ -1,56 +1,49 @@
 {
-  "name": "vue-esm-loader",
-  "version": "0.2.0",
-  "description": "Vue single-file component loader for Node",
+  "name": "vue-esm-loader-monorepo",
+  "private": true,
   "type": "module",
-  "main": "./lib/index.js",
-  "exports": {
-    ".": "./lib/index.js",
-    "./normalizer": "./lib/component-normalizer.js",
-    "./export-helper": "./lib/export-helper.js"
-  },
-  "imports": {
-    "#vue/version": "./lib/vue-version.js"
-  },
-  "scripts": {
-    "lint": "eslint --ext .js lib test",
-    "test": "npm run test:2.6 && npm run test:2.7 && npm run test:3",
-    "tests": "node test/shell.js",
-    "pretest:2.6": "npm install --save-dev @vue/test-utils@1.1.1 vue@2.6 vue-template-compiler@2.6 @vue/component-compiler-utils typescript@5",
-    "test:2.6": "npm run tests",
-    "posttest:2.6": "npm uninstall @vue/test-utils vue vue-template-compiler @vue/component-compiler-utils typescript",
-    "pretest:2.7": "npm install --save-dev @vue/test-utils@1.1.1 vue@2 typescript@5",
-    "test:2.7": "npm run tests",
-    "posttest:2.7": "npm uninstall @vue/test-utils vue typescript",
-    "pretest:3": "npm install --save-dev vue@3 @vue/test-utils@2 typescript@5",
-    "test:3": "npm run tests",
-    "posttest:3": "npm uninstall vue @vue/test-utils typescript"
-  },
   "engines": {
-    "node": ">=14.x"
+    "node": "^18.19.0 || >=20.6.0"
   },
-  "keywords": [
-    "Vue",
-    "loader",
-    "esm"
-  ],
-  "author": "Sebastiaan Marynissen <sebastiaan.marynissen@gmail.com>",
+  "description": "Monorepo for the development of vue-esm-loader",
   "repository": {
     "type": "git",
-    "url": "git://github.com/sebamarynissen/vue-esm-loader"
+    "url": "git+https://github.com/sebamarynissen/vue-esm-loader.git"
   },
+  "author": "Sebastiaan Marynissen <sebastiaan.marynissen@gmail.com>",
   "license": "MIT",
-  "dependencies": {
-    "create-esm-loader": "^0.2.5",
-    "hash-sum": "^2.0.0"
+  "bugs": {
+    "url": "https://github.com/sebamarynissen/vue-esm-loader/issues"
   },
+  "homepage": "https://github.com/sebamarynissen/vue-esm-loader#readme",
+  "scripts": {
+    "test": "npm run test:3 && npm run test:2.7 && npm run test:2.6",
+    "test:all": "npm test --workspaces --if-present",
+    "pretest:3": "npm i --save-dev vue@3 @vue/test-utils@2",
+    "test:3": "npm run test:all",
+    "posttest:3": "npm uninstall vue @vue/test-utils",
+    "pretest:2.7": "npm i --save-dev vue@2.7 @vue/test-utils@1.1.1",
+    "test:2.7": "npm run test:all",
+    "posttest:2.7": "npm uninstall vue @vue/test-utils",
+    "pretest:2.6": "npm i --save-dev vue@2.6 vue-template-compiler@2.6 @vue/test-utils@1.1.1 @vue/component-compiler-utils",
+    "test:2.6": "npm run test:all",
+    "posttest:2.6": "npm uninstall vue vue-template-compiler @vue/test-utils @vue/component-compiler-utils",
+    "lint": "eslint --ext .js packages test",
+    "prepublish": "node scripts/copy.js"
+  },
+  "workspaces": [
+    "test/core",
+    "test/options",
+    "test/typescript",
+    "packages/vue-esm-loader"
+  ],
   "devDependencies": {
-    "@whisthub/eslint-config": "^1.0.2",
-    "chai": "^4.3.4",
-    "eslint": "^8.36.0",
-    "jsdom": "^21.1.1",
-    "jsdom-global": "^3.0.2",
-    "mocha": "^9.1.3",
-    "semver": "^7.3.8"
+    "@whisthub/eslint-config": "^3.0.0",
+    "chai": "^5.1.1",
+    "esbuild": "^0.21.4",
+    "eslint": "^8.57.0",
+    "jsdom": "^24.1.0",
+    "mocha": "^10.4.0",
+    "semver": "^7.6.2"
   }
 }

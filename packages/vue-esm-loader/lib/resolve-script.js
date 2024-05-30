@@ -2,8 +2,8 @@
 import { resolveCompiler } from './compiler.js';
 import { major } from './vue-version.js';
 
-// # resolveScript(descriptor, ctc, query)
-export default function resolveScript(descriptor, ctx, query, scopeId) {
+// # resolveScript(descriptor, query, scopeId)
+export default function resolveScript(descriptor, query, scopeId) {
 
 	// Check for older compiler versions.
 	const { compiler } = resolveCompiler();

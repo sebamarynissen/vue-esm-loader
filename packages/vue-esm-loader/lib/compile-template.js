@@ -5,10 +5,10 @@ import { getDescriptor } from './descriptor-cache.js';
 import resolveScript from './resolve-script.js';
 import { major, minor } from './vue-version.js';
 
-// # compile(tpl, ctx)
+// # compile(tpl, descriptor, ctx)
 // Compiles the template. Note that we still need to check a few things in the 
 // url query, for example to know whether the template is functional.
-export default function compile(tpl, ctx) {
+export default function compile(tpl, descriptor, ctx) {
 
 	// Parse the query string from the url first and build the compiler 
 	// options from it.
@@ -30,16 +30,29 @@ export default function compile(tpl, ctx) {
 			].join('\n'));
 		}
 		if (descriptor.scriptSetup) {
-			let script = resolveScript(descriptor, null, null, scopeId);
+			let script = resolveScript(descriptor, null, scopeId);
 			bindings = script.bindings;
 		}
 	}
 
+	// Check for template preprocessors first.
+	const block = descriptor.template;
+	let preprocessOptions = block.lang && {};
+	if (block.lang === 'pug') {
+		preprocessOptions = {
+			doctype: 'html',
+			...preprocessOptions,
+		};
+	}
+
+	// Now actually compile the template with all the options.
 	const { compiler, templateCompiler } = resolveCompiler();
 	let source = String(tpl);
 	let compiled = compiler.compileTemplate({
 		id: scopeId,
 		source,
+		preprocessLang: block.lang === 'html' ? void 0 : block.lang,
+		preprocessOptions,
 		compilerOptions: {
 			...major === 3 && bindings && { bindingMetadata: bindings },
 		},

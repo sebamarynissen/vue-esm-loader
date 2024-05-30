@@ -3,7 +3,6 @@ import hash from 'hash-sum';
 import path from 'node:path';
 import { stringifyRequest, attrsToQuery } from './utils.js';
 import { getDescriptor, setDescriptor } from './descriptor-cache.js';
-import selectBlock from './select.js';
 
 // # createFacade(opts)
 // This function is called when we're actually transforming the .vue file 
@@ -13,29 +12,15 @@ export default function createFacade(opts = {}) {
 
 	// Parse an SFC descriptor. We'll always need this, regardless of what 
 	// we're about to do anyway.
-	const { source, filename, filePath, sourceRoot, query, ctx } = opts;
+	const { source, filename, filePath, sourceRoot } = opts;
 	const descriptor = getDescriptor(filePath, {
 		source,
 		sourceRoot,
 		version: 2,
 	});
 
-	// If we're loading something from the facade module, we will return early 
-	// and simply return the appropriate contents. Note that WE DO NOT compile 
-	// the template yet here! That's the responsibility of the `transform()` 
-	// function later on! This function is only responsible for returning the 
-	// correct *source*!
-	if (query.get('type') !== null) {
-		return selectBlock(
-			descriptor,
-			ctx,
-			query,
-		);
-	}
-
 	// Allright, reaching this point means that we're processing the facade vue 
 	// component. Let's generate the transform code for this now.
-	let id = hash(filePath);
 	let hasScoped = descriptor.styles.some(s => s.scoped);
 	let hasFunctional = (
 		descriptor.template &&
@@ -43,22 +28,26 @@ export default function createFacade(opts = {}) {
 	);
 
 	// Add the code importing the template.
+	const id = hash(filePath);
 	let templateImport = `var render, staticRenderFns;`;
 	if (descriptor.template) {
 
 		// IMPORTANT! If we're loading the template from an external file, we 
 		// have to store the desrciptor in the cache under that filename as well.
-		let src;
+		let src, srcQuery;
 		if (descriptor.template.src) {
 			let dir = path.dirname(filePath);
 			let templatePath = path.resolve(dir, descriptor.template.src);
 			setDescriptor(templatePath, descriptor);
 			let id = descriptor.template.src;
-			src = `${id}?vue`;
+			src = `${id}`;
+			srcQuery = '&src=true';
 		} else {
-			src = `./${filename}?vue&type=template`;
+			src = `./${filename}`;
+			srcQuery = '';
 		}
-		let query = attrsToQuery(descriptor.template.attrs);
+		let attrsQuery = attrsToQuery(descriptor.template.attrs);
+		let query = `?vue&type=template${attrsQuery}${srcQuery}`;
 		let req = stringifyRequest(src + query);
 		templateImport = `import { render, staticRenderFns } from ${req};`;
 	}
@@ -68,15 +57,17 @@ export default function createFacade(opts = {}) {
 	let { script, scriptSetup } = descriptor;
 	if (script || scriptSetup) {
 		let src;
+		let srcQuery = '&src=true';
 		if (script && script.src) {
 			src = script.src;
 		} else if (scriptSetup && scriptSetup.src) {
 			src = scriptSetup.src;
 		} else {
 			src = `./${filename}`;
+			srcQuery = '';
 		}
 		let attrsQuery = attrsToQuery((scriptSetup || script).attrs, 'js');
-		let query = `?vue&type=script${attrsQuery}`;
+		let query = `?vue&type=script${attrsQuery}${srcQuery}`;
 		let req = stringifyRequest(src + query);
 		scriptImport = [
 			`import script from ${req}`,

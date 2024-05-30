@@ -3,23 +3,14 @@ import hash from 'hash-sum';
 import path from 'node:path';
 import { stringifyRequest, attrsToQuery } from './utils.js';
 import { getDescriptor, setDescriptor } from './descriptor-cache.js';
-import selectBlock from './select.js';
 
 // # createFacade(opts)
 // The generator for the facade module when working with Vue 3.
 export default function createFacade(opts = {}) {
 	
 	// Parse an SFC descriptor in the v3 way.
-	const { source, filename, filePath, query, ctx } = opts;
+	const { source, filename, filePath } = opts;
 	const descriptor = getDescriptor(filePath, { source });
-
-	// If we're loading a submodule from the facade module, we will return 
-	// early and select the proper block. We don't build up the facade module 
-	// in that case.
-	let id = hash(filePath);
-	if (query.get('type') !== null) {
-		return selectBlock(descriptor, ctx, query, id);
-	}
 
 	// Add the code for the script.
 	let propsToAttach = [];
@@ -27,14 +18,16 @@ export default function createFacade(opts = {}) {
 	let { script, scriptSetup } = descriptor;
 	if (script || scriptSetup) {
 		let src = script?.src || scriptSetup?.src || `./${filename}`;
+		let srcQuery = script?.src || scriptSetup?.src ? '&src=true' : '';
 		let attrsQuery = attrsToQuery((scriptSetup || script).attrs, 'js');
-		let query = `?vue&type=script${attrsQuery}`;
+		let query = `?vue&type=script${srcQuery}${attrsQuery}`;
 		let req = stringifyRequest(src + query);
 		scriptImport = `import script from ${req}\n`;
 		scriptImport += `export * from ${req}`;
 	}
 
 	// Add the code for importing the template.
+	const id = hash(filePath);
 	let templateImport = ``;
 	let renderFnName = 'render';
 	if (descriptor.template) {
@@ -53,8 +46,9 @@ export default function createFacade(opts = {}) {
 			src = `./${filename}`;
 		}
 		let idQuery = `&id=${id}`;
+		let srcQuery = descriptor.template.src ? '&src=true' : '';
 		let attrsQuery = attrsToQuery(descriptor.template.attrs);
-		let query = `?vue&type=template${idQuery}${attrsQuery}`;
+		let query = `?vue&type=template${idQuery}${srcQuery}${attrsQuery}`;
 		let req = stringifyRequest(src + query);
 		templateImport = `import { ${renderFnName} } from ${req}`;
 		propsToAttach.push([renderFnName, renderFnName]);

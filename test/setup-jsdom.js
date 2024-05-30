@@ -1,6 +1,24 @@
 // # setup-jsdom.js
-import setup from 'jsdom-global';
-setup();
+import { JSDOM } from 'jsdom';
+const dom = new JSDOM('', {
+	url: 'https://www.example.com',
+});
 
-// Vue needs an SVGElement, which JSDOM does not support apparently.
-globalThis.SVGElement = class SVGElement {};
+const keys = [
+	'document',
+	'window',
+	'SVGElement',
+	'Element',
+	'HTMLBodyElement',
+];
+Object.assign(globalThis, Object.fromEntries(
+	keys.map(key => [key, dom.window[key]]),
+));
+
+// Apparently Node 22 has a `navigator` global, so we can't just blindly copy it 
+// anymore.
+if (!('navigator' in globalThis)) {
+	globalThis.navigator = dom.window.navigator;
+} else {
+	Object.assign(globalThis.navigator, dom.window.navigator);
+}

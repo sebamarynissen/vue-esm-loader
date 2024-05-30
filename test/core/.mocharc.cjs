@@ -1,5 +1,4 @@
 'use strict';
 module.exports = {
-	'experimental-loader': 'vue-esm-loader',
-	'no-warnings': true,
+	'import': 'vue-esm-loader/register',
 };
