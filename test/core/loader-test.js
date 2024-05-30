@@ -95,6 +95,12 @@ describe('The vue esm loader', function() {
 			expect(render).to.be.a('function');
 		});
 
+		it('pug.vue', async function() {
+			const component = await this.require();
+			let el = await mount(component);
+			expect(el.outerHTML).to.equal('<p>Hello world!</p>');
+		});
+
 		it('multi-root.vue', async function() {
 			this.semver('>=3');
 			await this.require();
