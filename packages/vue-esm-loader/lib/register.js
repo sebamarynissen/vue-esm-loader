@@ -1,3 +1,2 @@
-import { register } from 'node:module';
-
-register('vue-esm-loader', import.meta.url);
+import { register } from 'vue-esm-loader';
+register();

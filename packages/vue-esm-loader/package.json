@@ -5,7 +5,8 @@
   "type": "module",
   "main": "./lib/esm-loader.js",
   "exports": {
-    ".": "./lib/esm-loader.js",
+    ".": "./lib/api.js",
+    "./hooks": "./lib/esm-loader.js",
     "./register": "./lib/register.js",
     "./normalizer": "./lib/component-normalizer.js",
     "./export-helper": "./lib/export-helper.js"

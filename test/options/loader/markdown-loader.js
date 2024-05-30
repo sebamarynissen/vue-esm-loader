@@ -1,4 +1,6 @@
 // # markdown-loader.js
+import module from 'node:module';
+
 export async function load(req, ctx, nextLoad) {
 
 	// If we're not dealing with .md files, pass on to the next in the chain.
@@ -29,4 +31,8 @@ export async function load(req, ctx, nextLoad) {
 		format: 'module',
 	};
 
+}
+
+export function register() {
+	module.register(import.meta.url);
 }
