@@ -17,7 +17,8 @@
   },
   "homepage": "https://github.com/sebamarynissen/vue-esm-loader#readme",
   "scripts": {
-    "test": "npm test -w test --if-present"
+    "test": "npm test -w test --if-present",
+    "lint": "eslint --ext .js packages test"
   },
   "workspaces": [
     "test",
@@ -27,7 +28,7 @@
   "devDependencies": {
     "@whisthub/eslint-config": "^3.0.0",
     "chai": "^5.1.1",
-    "eslint": "^9.3.0",
+    "eslint": "^8.57.0",
     "jsdom": "^24.1.0",
     "mocha": "^10.4.0",
     "semver": "^7.6.2"

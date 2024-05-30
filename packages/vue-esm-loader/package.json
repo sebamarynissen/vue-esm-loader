@@ -14,9 +14,6 @@
   "imports": {
     "#vue/version": "./lib/vue-version.js"
   },
-  "scripts": {
-    "lint": "eslint --ext .js lib test"
-  },
   "engines": {
     "node": "^18.19.0 || >=20.6.0"
   },
