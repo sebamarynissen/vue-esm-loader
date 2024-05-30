@@ -42,7 +42,6 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@rollup/pluginutils": "^5.1.0",
     "create-esm-loader": "^0.2.5",
     "hash-sum": "^2.0.0",
     "picomatch": "^4.0.2"
