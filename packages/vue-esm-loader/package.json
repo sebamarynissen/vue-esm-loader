@@ -28,6 +28,9 @@
     "url": "git://github.com/sebamarynissen/vue-esm-loader.git"
   },
   "license": "MIT",
+  "scripts": {
+    "prepublishOnly": "node ../../scripts/copy.js"
+  },
   "dependencies": {
     "@rollup/pluginutils": "^5.1.0",
     "hash-sum": "^2.0.0"

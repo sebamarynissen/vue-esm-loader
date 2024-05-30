@@ -28,7 +28,8 @@
     "pretest:2.6": "npm i --save-dev vue@2.6 vue-template-compiler@2.6 @vue/test-utils@1.1.1 @vue/component-compiler-utils",
     "test:2.6": "npm run test:all",
     "posttest:2.6": "npm uninstall vue vue-template-compiler @vue/test-utils @vue/component-compiler-utils",
-    "lint": "eslint --ext .js packages test"
+    "lint": "eslint --ext .js packages test",
+    "prepublish": "node scripts/copy.js"
   },
   "workspaces": [
     "test/core",
