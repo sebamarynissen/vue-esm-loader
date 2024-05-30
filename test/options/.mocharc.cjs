@@ -1,4 +1,3 @@
 module.exports = {
-	'experimental-loader': './loader/options-loader.js',
-	'no-warnings': true,
+	'import': './loader/options-loader.js',
 };
