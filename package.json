@@ -3,9 +3,9 @@
   "version": "0.2.0",
   "description": "Vue single-file component loader for Node",
   "type": "module",
-  "main": "./lib/index.js",
+  "main": "./lib/esm-loader.js",
   "exports": {
-    ".": "./lib/index.js",
+    ".": "./lib/esm-loader.js",
     "./normalizer": "./lib/component-normalizer.js",
     "./export-helper": "./lib/export-helper.js"
   },
