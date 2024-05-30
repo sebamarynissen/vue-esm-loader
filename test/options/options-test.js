@@ -1,7 +1,7 @@
 import semver from 'semver';
 import { expect } from 'chai';
 import { mount } from '../mount.js';
-import version from 'vue-esm-loader/vue-version';
+import version from '../version.js';
 
 describe('vue-esm-loader with custom options', function() {
 

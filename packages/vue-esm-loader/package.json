@@ -6,7 +6,6 @@
   "main": "./lib/esm-loader.js",
   "exports": {
     ".": "./lib/esm-loader.js",
-    "./vue-version": "./lib/vue-version.js",
     "./register": "./lib/register.js",
     "./normalizer": "./lib/component-normalizer.js",
     "./export-helper": "./lib/export-helper.js"
