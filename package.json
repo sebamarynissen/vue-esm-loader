@@ -33,6 +33,7 @@
   "workspaces": [
     "test/core",
     "test/options",
+    "test/typescript",
     "packages/vue-esm-loader"
   ],
   "devDependencies": {
