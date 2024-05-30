@@ -1,6 +1,6 @@
 // # mount.js
 import './setup-jsdom.js';
-import { major } from '#vue/version';
+import { major } from 'vue-esm-loader/vue-version';
 
 export async function mount(Component) {
 	if (major === 2) {

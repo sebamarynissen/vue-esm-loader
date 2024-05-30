@@ -1,0 +1,5 @@
+{
+	"type": "module",
+	"scripts": {
+		"pretest:3": "npm install --save-dev vue@3 @vue/test-utils@2"
+	}

@@ -1,5 +1,6 @@
 {
   "name": "vue-esm-loader-test-core",
+  "type": "module",
   "private": true,
   "scripts": {
     "test": "mocha *-test.js"
