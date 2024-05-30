@@ -1,8 +1,8 @@
 import * as tsx from 'tsx/esm/api';
 import * as vue from 'vue-esm-loader';
 
-// IMPORTANT! vue-esm-loader needs to be registered **before** tsx, otherwise 
-// ts imports from within <script> don't get processed by vue-esm-loader!
+// IMPORTANT! tsx needs to be registered **after** vue-esm-loader, otherwise
+// tsx will try to transform .vue files!
 vue.register();
 tsx.register();
 
