@@ -1,7 +1,7 @@
 // # descriptor-cache.js
 import fs from 'node:fs';
 import { resolveCompiler } from './compiler.js';
-import vueVersion from './vue-version.js';
+import { major } from './vue-version.js';
 
 const cache = new Map();
 
@@ -23,7 +23,7 @@ export function getDescriptor(filename, opts = {}) {
 	// sure.
 	const {
 		source = fs.readFileSync(filename),
-		version = vueVersion,
+		version = major,
 	} = opts;
 
 	// Create the descriptor based on the version.
@@ -31,7 +31,7 @@ export function getDescriptor(filename, opts = {}) {
 		const { sourceRoot } = opts;
 		const { compiler, templateCompiler } = resolveCompiler();
 		let descriptor = compiler.parse({
-			source,
+			source: String(source),
 			filename,
 			sourceRoot,
 			...templateCompiler && { compiler: templateCompiler() },

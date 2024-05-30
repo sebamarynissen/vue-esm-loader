@@ -38,6 +38,7 @@
   "devDependencies": {
     "@whisthub/eslint-config": "^3.0.0",
     "chai": "^5.1.1",
+    "esbuild": "^0.21.4",
     "eslint": "^8.57.0",
     "jsdom": "^24.1.0",
     "mocha": "^10.4.0",

@@ -2,6 +2,7 @@
 import { fileURLToPath } from 'node:url';
 import hash from 'hash-sum';
 import { createFilter } from '@rollup/pluginutils';
+import esbuild from 'esbuild';
 import transformMain from './transform-main.js';
 import compileTemplate from './compile-template.js';
 import resolveScript from './resolve-script.js';
@@ -57,6 +58,27 @@ export async function load(req, ctx, nextLoad) {
 			descriptor,
 			{ url },
 		);
+	} else if (query.get('type') === 'script') {
+		const filePath = fileURLToPath(req);
+		const descriptor = getDescriptor(filePath, { source });
+		const lang = (
+			descriptor?.script?.lang ||
+			descriptor?.scriptSetup?.lang ||
+			'js'
+		);
+	
+		// If the script is written in TypeScript, transpile it with esbuild. 
+		// Note: this is only done when referencing a script from a vue 
+		// component! If you import a bare `.ts` file, it **will not** get 
+		// transpiled, so you need a custom typescript loader!
+		if (lang === 'ts') {
+			({ code: source } = await esbuild.transform(source, {
+				loader: 'ts',
+				target: 'esnext',
+				sourcemap: 'inline',
+			}));
+		}
+
 	}
 
 	// Return at last.
