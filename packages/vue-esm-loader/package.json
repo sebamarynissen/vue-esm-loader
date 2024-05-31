@@ -33,6 +33,7 @@
   },
   "dependencies": {
     "@rollup/pluginutils": "^5.1.0",
+    "esbuild": "^0.21.4",
     "hash-sum": "^2.0.0"
   },
   "bugs": {
