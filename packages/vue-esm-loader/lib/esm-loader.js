@@ -2,7 +2,6 @@
 import { fileURLToPath } from 'node:url';
 import hash from 'hash-sum';
 import { createFilter } from '@rollup/pluginutils';
-import esbuild from 'esbuild';
 import transformMain from './transform-main.js';
 import compileTemplate from './compile-template.js';
 import resolveScript from './resolve-script.js';
@@ -72,7 +71,8 @@ export async function load(req, ctx, nextLoad) {
 		// component! If you import a bare `.ts` file, it **will not** get 
 		// transpiled, so you need a custom typescript loader!
 		if (lang === 'ts') {
-			({ code: source } = await esbuild.transform(source, {
+			const { transform } = await import('esbuild');
+			({ code: source } = await transform(source, {
 				loader: 'ts',
 				target: 'esnext',
 				sourcemap: 'inline',
