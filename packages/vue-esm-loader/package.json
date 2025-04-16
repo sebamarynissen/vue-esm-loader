@@ -32,8 +32,8 @@
     "prepublishOnly": "node ../../scripts/copy.js"
   },
   "dependencies": {
-    "@rollup/pluginutils": "^5.1.0",
-    "esbuild": "^0.21.4",
+    "@rollup/pluginutils": "^5.1.4",
+    "esbuild": "^0.25.2",
     "hash-sum": "^2.0.0"
   },
   "bugs": {
