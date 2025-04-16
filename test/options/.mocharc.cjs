@@ -1,3 +1,3 @@
 module.exports = {
-	'import': './loader/options-loader.js',
+	import: './loader/options-loader.js',
 };

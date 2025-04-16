@@ -41,7 +41,7 @@ function getSFCCompiler() {
 	} catch {
 		try {
 			return tryRequire('@vue/compiler-sfc');
-		} catch (e) {
+		} catch {
 			throw new Error(`vue-esm-loader requires @vue/compiler-sfc to be present in the dependencies! Please install vue >=3.2.13`);
 		}
 	}

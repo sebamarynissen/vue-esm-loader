@@ -1,3 +1,3 @@
 module.exports = {
-	'import': './typescript-loader.js',
+	import: './typescript-loader.js',
 };
